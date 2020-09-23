@@ -40,7 +40,7 @@ class Level(AbstractBaseModel):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f'{self.game} - {self.name}'
 
 
 class Mode(AbstractBaseModel):
