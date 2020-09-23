@@ -34,6 +34,9 @@ class Game(AbstractBaseModel):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class Level(AbstractBaseModel):
     name = models.CharField(max_length=200)
@@ -42,6 +45,9 @@ class Level(AbstractBaseModel):
     def __str__(self):
         return f'{self.game} - {self.name}'
 
+    class Meta:
+        ordering = ['game', 'name']
+
 
 class Mode(AbstractBaseModel):
     name = models.CharField(max_length=200)
@@ -49,13 +55,19 @@ class Mode(AbstractBaseModel):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class MatchType(AbstractBaseModel):
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
     mode = models.ForeignKey(Mode, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.level.game} - {self.level} - {self.mode}'
+        return f'{self.level} - {self.mode}'
+
+    class Meta:
+        ordering = ['level', 'mode']
 
 
 class Match(AbstractBaseModel):
