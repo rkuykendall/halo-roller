@@ -36,6 +36,9 @@ class Game(AbstractBaseModel):
 
     class Meta:
         ordering = ['name']
+        constraints = [
+            models.UniqueConstraint(fields=['name'], name='unique_game')
+        ]
 
 
 class Level(AbstractBaseModel):
@@ -47,6 +50,9 @@ class Level(AbstractBaseModel):
 
     class Meta:
         ordering = ['game', 'name']
+        constraints = [
+            models.UniqueConstraint(fields=['game', 'name'], name='unique_level')
+        ]
 
 
 class Mode(AbstractBaseModel):
@@ -57,6 +63,9 @@ class Mode(AbstractBaseModel):
 
     class Meta:
         ordering = ['name']
+        constraints = [
+            models.UniqueConstraint(fields=['name'], name='unique_mode')
+        ]
 
 
 class MatchType(AbstractBaseModel):
@@ -68,6 +77,9 @@ class MatchType(AbstractBaseModel):
 
     class Meta:
         ordering = ['level', 'mode']
+        constraints = [
+            models.UniqueConstraint(fields=['level', 'mode'], name='unique_match_type')
+        ]
 
 
 class Match(AbstractBaseModel):
